@@ -1,0 +1,37 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: ['8', '11', '17', '21']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK ${{ matrix.java-version }}
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ matrix.java-version }}
+        distribution: 'temurin'
+
+    - name: Compile Java source
+      run: |
+        cd java
+        javac com/carlogohelper/CarLogoHelper.java
+
+    - name: Verify compilation
+      run: |
+        test -f java/com/carlogohelper/CarLogoHelper.class && echo "Compilation successful!" || exit 1
+
+    - name: Basic syntax check
+      run: |
+        cd java
+        javap com.carlogohelper.CarLogoHelper | grep "public class"

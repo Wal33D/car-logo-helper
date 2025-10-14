@@ -1,4 +1,9 @@
-# Car Logo Helper
+# Automotive Logo Library
+
+[![Python CI](https://github.com/wal33d/automotive-logo-library/workflows/Python%20CI/badge.svg)](https://github.com/wal33d/automotive-logo-library/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/downloads/)
+[![Java Version](https://img.shields.io/badge/java-8%2B-orange)](https://www.oracle.com/java/)
 
 A lightweight library for mapping car manufacturers to their logos and decoding Vehicle Identification Numbers (VINs).
 
@@ -23,15 +28,29 @@ The library includes logos for major automotive manufacturers including:
 
 ## Installation
 
+### Python
+
+```bash
+# Install from PyPI (coming soon)
+pip install automotive-logo-library
+
+# Or install from source
+git clone https://github.com/wal33d/automotive-logo-library.git
+cd automotive-logo-library/python
+pip install -e .
+```
+
 ### Java
 
 Copy the Java implementation from `java/com/carlogohelper/CarLogoHelper.java` into your project.
 
-### Python
-
-```bash
-# Install from source
-pip install -e python/
+```xml
+<!-- Maven (coming soon) -->
+<dependency>
+    <groupId>com.carlogohelper</groupId>
+    <artifactId>automotive-logo-library</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 
 ## Usage
@@ -133,8 +152,10 @@ All logo files are PNG images located in the `assets/logos/` directory. Logos ar
 ## Project Structure
 
 ```
-car-logo-helper/
+automotive-logo-library/
 ├── README.md
+├── LICENSE
+├── .gitignore
 ├── assets/
 │   └── logos/           # Logo PNG files
 ├── java/
@@ -142,12 +163,17 @@ car-logo-helper/
 │       └── carlogohelper/
 │           └── CarLogoHelper.java
 ├── python/
+│   ├── setup.py
+│   ├── pyproject.toml
 │   └── carlogohelper/
 │       └── __init__.py
-└── docs/                # Additional documentation
+└── .github/
+    └── workflows/       # CI/CD workflows
 ```
 
 ## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 This project is provided as-is for use with OBD-Droid and related automotive applications.
 

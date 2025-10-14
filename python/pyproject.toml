@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "automotive-logo-library"
+version = "1.0.0"
+description = "A lightweight library for mapping car manufacturers to their logos and decoding VINs"
+readme = "../README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "Waleed Judah", email = "aquataze@yahoo.com"}
+]
+keywords = ["automotive", "car", "logo", "vin", "decoder", "manufacturer", "brand"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/wal33d/automotive-logo-library"
+"Bug Reports" = "https://github.com/wal33d/automotive-logo-library/issues"
+"Source" = "https://github.com/wal33d/automotive-logo-library"
+
+[tool.setuptools]
+packages = ["carlogohelper"]
+
+[tool.setuptools.package-data]
+"*" = ["../../assets/logos/*.png"]

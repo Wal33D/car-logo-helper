@@ -1,0 +1,79 @@
+name: Python CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel
+        cd python
+        pip install -e .
+
+    - name: Test imports
+      run: |
+        python -c "from carlogohelper import CarLogoHelper; print('Import successful')"
+        python -c "from carlogohelper import get_manufacturer_from_vin, get_logo_filename; print('Function imports successful')"
+
+    - name: Test basic functionality
+      run: |
+        python -c "
+        from carlogohelper import get_manufacturer_from_vin, has_logo, get_logo_filename
+
+        # Test VIN decoding
+        assert get_manufacturer_from_vin('5YJ3E1EA3JF000001') == 'TESLA', 'Tesla VIN failed'
+        assert get_manufacturer_from_vin('WDB2020331A123456') == 'MERCEDES-BENZ', 'Mercedes VIN failed'
+        assert get_manufacturer_from_vin('1HGCM82633A123456') == 'HONDA', 'Honda VIN failed'
+
+        # Test logo existence
+        assert has_logo('BMW') == True, 'BMW logo check failed'
+        assert has_logo('Tesla') == True, 'Tesla logo check failed'
+        assert has_logo('NonExistent') == False, 'Non-existent logo check failed'
+
+        # Test logo filename
+        assert get_logo_filename('BMW') == 'logo_bmw.png', 'BMW logo filename failed'
+        assert get_logo_filename('Mercedes-Benz') == 'logo_mercedes_benz.png', 'Mercedes logo filename failed'
+
+        print('All tests passed!')
+        "
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install linting tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 python/carlogohelper --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 python/carlogohelper --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
