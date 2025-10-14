@@ -2,7 +2,7 @@
 
 [![Python CI](https://github.com/wal33d/automotive-logo-library/workflows/Python%20CI/badge.svg)](https://github.com/wal33d/automotive-logo-library/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/python-3.7%2B-blue)](https://www.python.org/downloads/)
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![Java Version](https://img.shields.io/badge/java-8%2B-orange)](https://www.oracle.com/java/)
 
 A lightweight library for mapping car manufacturers to their logos and decoding Vehicle Identification Numbers (VINs).
