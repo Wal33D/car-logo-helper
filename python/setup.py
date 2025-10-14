@@ -2,11 +2,6 @@
 """Setup script for automotive-logo-library Python package."""
 
 from setuptools import setup, find_packages
-from pathlib import Path
-
-# Read the README file
-readme_file = Path(__file__).parent.parent / "README.md"
-long_description = readme_file.read_text(encoding="utf-8") if readme_file.exists() else ""
 
 setup(
     name="automotive-logo-library",
@@ -14,8 +9,6 @@ setup(
     author="Waleed Judah",
     author_email="aquataze@yahoo.com",
     description="A lightweight library for mapping car manufacturers to their logos and decoding VINs",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
     url="https://github.com/wal33d/automotive-logo-library",
     packages=find_packages(),
     classifiers=[
