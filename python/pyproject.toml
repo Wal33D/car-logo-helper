@@ -27,9 +27,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/wal33d/automotive-logo-library"
-"Bug Reports" = "https://github.com/wal33d/automotive-logo-library/issues"
-"Source" = "https://github.com/wal33d/automotive-logo-library"
+Homepage = "https://github.com/wal33d/car-logo-helper"
+"Bug Reports" = "https://github.com/wal33d/car-logo-helper/issues"
+"Source" = "https://github.com/wal33d/car-logo-helper"
 
 [tool.setuptools]
 packages = ["carlogohelper"]

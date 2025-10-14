@@ -9,7 +9,7 @@ setup(
     author="Waleed Judah",
     author_email="aquataze@yahoo.com",
     description="A lightweight library for mapping car manufacturers to their logos and decoding VINs",
-    url="https://github.com/wal33d/automotive-logo-library",
+    url="https://github.com/wal33d/car-logo-helper",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -27,8 +27,8 @@ setup(
     python_requires=">=3.8",
     keywords="automotive car logo vin decoder manufacturer brand",
     project_urls={
-        "Bug Reports": "https://github.com/wal33d/automotive-logo-library/issues",
-        "Source": "https://github.com/wal33d/automotive-logo-library",
+        "Bug Reports": "https://github.com/wal33d/car-logo-helper/issues",
+        "Source": "https://github.com/wal33d/car-logo-helper",
     },
     include_package_data=True,
     package_data={

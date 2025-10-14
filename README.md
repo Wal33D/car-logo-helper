@@ -1,11 +1,13 @@
-# Automotive Logo Library
+# Car Logo Helper
 
-[![Python CI](https://github.com/wal33d/automotive-logo-library/workflows/Python%20CI/badge.svg)](https://github.com/wal33d/automotive-logo-library/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python CI](https://github.com/wal33d/car-logo-helper/actions/workflows/python-ci.yml/badge.svg)](https://github.com/wal33d/car-logo-helper/actions/workflows/python-ci.yml)
+[![Java CI](https://github.com/wal33d/car-logo-helper/actions/workflows/java-ci.yml/badge.svg)](https://github.com/wal33d/car-logo-helper/actions/workflows/java-ci.yml)
+[![Android CI](https://github.com/wal33d/car-logo-helper/actions/workflows/android-ci.yml/badge.svg)](https://github.com/wal33d/car-logo-helper/actions/workflows/android-ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![Java Version](https://img.shields.io/badge/java-8%2B-orange)](https://www.oracle.com/java/)
 
-A lightweight library for mapping car manufacturers to their logos and decoding Vehicle Identification Numbers (VINs).
+Lightweight helpers to map car manufacturers to logo assets and decode Vehicle Identification Numbers (VINs). Available for Python, Java, and Android.
 
 ## Features
 
@@ -31,27 +33,33 @@ The library includes logos for major automotive manufacturers including:
 ### Python
 
 ```bash
-# Install from PyPI (coming soon)
-pip install automotive-logo-library
-
-# Or install from source
-git clone https://github.com/wal33d/automotive-logo-library.git
-cd automotive-logo-library/python
+# Install from source
+git clone https://github.com/wal33d/car-logo-helper.git
+cd car-logo-helper/python
 pip install -e .
 ```
 
+Note: When published to PyPI, the distribution name will be `automotive-logo-library` and the import name remains `carlogohelper`.
+
 ### Java
 
-Copy the Java implementation from `java/com/carlogohelper/CarLogoHelper.java` into your project.
+Copy `java/com/carlogohelper/CarLogoHelper.java` into your project, or compile directly:
 
-```xml
-<!-- Maven (coming soon) -->
-<dependency>
-    <groupId>com.carlogohelper</groupId>
-    <artifactId>automotive-logo-library</artifactId>
-    <version>1.0.0</version>
-</dependency>
+```bash
+cd java
+javac com/carlogohelper/CarLogoHelper.java
 ```
+
+Use on the classpath as needed for your project setup.
+
+### Android
+
+A ready-to-use Android library module is included at `android/carlogohelper-android`.
+
+- Option 1: Import the module into your Android project (File → New → Import Module...) and select `android/carlogohelper-android`.
+- Option 2: Add as a composite build or submodule and include `":carlogohelper-android"` in your settings.
+
+Requirements: `compileSdk 34`, `minSdk 21`.
 
 ## Usage
 
@@ -102,11 +110,39 @@ has_logo = helper.has_logo("Toyota")
 
 # Get logo URL for web apps
 logo_url = helper.get_logo_url("Tesla")
-# Returns: "https://raw.githubusercontent.com/.../logo_tesla.png"
+# Returns: "https://raw.githubusercontent.com/wal33d/car-logo-helper/main/assets/logos/logo_tesla.png"
 
 # Get all supported manufacturers
 manufacturers = helper.get_supported_manufacturers()
 ```
+
+### Android
+
+```java
+import com.carlogohelper.CarLogoHelperAndroid;
+
+// Decode VIN to manufacturer
+String make = CarLogoHelperAndroid.getManufacturerFromVIN("WDB2020331A123456");
+
+// Get the logo as a Drawable
+Drawable logo = CarLogoHelperAndroid.getLogoDrawable(context, "BMW");
+
+// Or open an InputStream to the asset
+InputStream is = CarLogoHelperAndroid.openLogoStream(context, "Toyota");
+
+// Or build a URI to the asset for image loaders
+Uri uri = CarLogoHelperAndroid.getLogoAssetUri("Tesla"); // file:///android_asset/logos/logo_tesla.png
+
+// Check availability
+boolean hasLogo = CarLogoHelperAndroid.hasLogo(context, "Mercedes-Benz");
+
+// List supported manufacturers
+String[] supported = CarLogoHelperAndroid.getSupportedManufacturers();
+```
+
+## API Reference
+
+For a summary of available functions and methods in both languages, see `docs/API.md`.
 
 ### Using functions directly (Python)
 
@@ -152,12 +188,20 @@ All logo files are PNG images located in the `assets/logos/` directory. Logos ar
 ## Project Structure
 
 ```
-automotive-logo-library/
+car-logo-helper/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
 ├── assets/
 │   └── logos/           # Logo PNG files
+├── android/
+│   ├── build.gradle     # Android project build
+│   ├── settings.gradle  # Includes :carlogohelper-android
+│   └── carlogohelper-android/
+│       ├── build.gradle
+│       └── src/main/
+│           ├── AndroidManifest.xml
+│           └── java/com/carlogohelper/CarLogoHelperAndroid.java
 ├── java/
 │   └── com/
 │       └── carlogohelper/
@@ -173,14 +217,16 @@ automotive-logo-library/
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See `LICENSE`.
 
-This project is provided as-is for use with OBD-Droid and related automotive applications.
+## Legal
+
+All trademarks, logos, and brand names are the property of their respective owners. Logos in `assets/logos/` are provided for identification and educational purposes only and may be subject to additional rights. Ensure you have the right to use these assets in your application.
+
+## Contributing
+
+Contributions are welcome! See `CONTRIBUTING.md` for guidelines, including how to add a new manufacturer, run checks, and open pull requests.
 
 ## Author
 
 Waleed Judah (Wal33D)
-
-## Contributing
-
-Feel free to submit issues and enhancement requests.
