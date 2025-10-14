@@ -1,4 +1,4 @@
-package com.carlogohelper;
+package com.automotivelogolibrary;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -15,7 +15,7 @@ import java.util.Map;
  * Logos are bundled under the module's assets directory at: assets/logos/
  * You can reference them via the Android asset URI scheme: file:///android_asset/logos/<filename>
  */
-public final class CarLogoHelperAndroid {
+public final class AutomotiveLogoLibraryAndroid {
 
     private static final Map<String, String> LOGO_MAP = new HashMap<>();
     private static final Map<String, String> VIN_WMI_MAP = new HashMap<>(); // World Manufacturer Identifier
@@ -264,15 +264,10 @@ public final class CarLogoHelperAndroid {
         VIN_WMI_MAP.put("5Y", "TESLA");
     }
 
-    private CarLogoHelperAndroid() {
+    private AutomotiveLogoLibraryAndroid() {
         // no instances
     }
 
-    /**
-     * Get the manufacturer from a VIN.
-     * @param vin The Vehicle Identification Number
-     * @return The manufacturer name, or null if not found
-     */
     public static String getManufacturerFromVIN(String vin) {
         if (vin == null || vin.length() < 3) {
             return null;
@@ -280,11 +275,9 @@ public final class CarLogoHelperAndroid {
 
         String upperVin = vin.toUpperCase().trim();
 
-        // Try 3-character WMI first
         String wmi = upperVin.substring(0, Math.min(3, upperVin.length()));
         String manufacturer = VIN_WMI_MAP.get(wmi);
 
-        // If not found, try 2-character prefix
         if (manufacturer == null && upperVin.length() >= 2) {
             String prefix = upperVin.substring(0, 2);
             manufacturer = VIN_WMI_MAP.get(prefix);
@@ -293,19 +286,12 @@ public final class CarLogoHelperAndroid {
         return manufacturer;
     }
 
-    /**
-     * Get logo filename for a given manufacturer name or VIN.
-     * @param input Either a manufacturer name or a VIN
-     * @return Logo filename, or null if not found
-     */
     public static String getLogoFilename(String input) {
         if (input == null || input.isEmpty()) {
             return null;
         }
 
         String manufacturer = input;
-
-        // Check if input looks like a VIN (3-17 chars)
         if (input.length() >= 3 && input.length() <= 17) {
             String vinManufacturer = getManufacturerFromVIN(input);
             if (vinManufacturer != null) {
@@ -313,19 +299,13 @@ public final class CarLogoHelperAndroid {
             }
         }
 
-        // Convert to uppercase for case-insensitive lookup
         String upperMake = manufacturer.toUpperCase().trim();
-
-        // Direct lookup
         String logoFile = LOGO_MAP.get(upperMake);
 
-        // Try partial matches if no direct match
         if (logoFile == null) {
             String cleanedMake = upperMake.replaceAll("[-\\s]", "");
-
             for (Map.Entry<String, String> entry : LOGO_MAP.entrySet()) {
                 String cleanedKey = entry.getKey().replaceAll("[-\\s]", "");
-
                 if (cleanedMake.contains(cleanedKey) || cleanedKey.contains(cleanedMake) ||
                         upperMake.contains(entry.getKey()) || entry.getKey().contains(upperMake)) {
                     logoFile = entry.getValue();
@@ -337,9 +317,6 @@ public final class CarLogoHelperAndroid {
         return logoFile;
     }
 
-    /**
-     * Returns true if a logo exists for the given manufacturer or VIN.
-     */
     public static boolean hasLogo(Context context, String input) {
         String filename = getLogoFilename(input);
         if (filename == null) return false;
@@ -350,9 +327,6 @@ public final class CarLogoHelperAndroid {
         }
     }
 
-    /**
-     * Returns an InputStream for the logo in assets, or null if not found.
-     */
     public static InputStream openLogoStream(Context context, String input) {
         String filename = getLogoFilename(input);
         if (filename == null) return null;
@@ -363,9 +337,6 @@ public final class CarLogoHelperAndroid {
         }
     }
 
-    /**
-     * Returns a Drawable for the logo from assets, or null if not found.
-     */
     public static Drawable getLogoDrawable(Context context, String input) {
         InputStream is = openLogoStream(context, input);
         if (is == null) return null;
@@ -376,25 +347,16 @@ public final class CarLogoHelperAndroid {
         }
     }
 
-    /**
-     * Returns the asset-relative path for the logo (e.g., "logos/logo_bmw.png"), or null.
-     */
     public static String getLogoAssetPath(String input) {
         String filename = getLogoFilename(input);
         return filename == null ? null : ("logos/" + filename);
     }
 
-    /**
-     * Returns a file:///android_asset URI for use with components that accept URIs.
-     */
     public static Uri getLogoAssetUri(String input) {
         String filename = getLogoFilename(input);
         return filename == null ? null : Uri.parse("file:///android_asset/logos/" + filename);
     }
 
-    /**
-     * Get a list of all supported manufacturers.
-     */
     public static String[] getSupportedManufacturers() {
         return LOGO_MAP.keySet().toArray(new String[0]);
     }

@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "automotive-logo-library-android"
-include(":carlogohelper-android")
-
+include(":automotive-logo-library-android")
+project(":automotive-logo-library-android").projectDir = file("automotive-logo-library-android")

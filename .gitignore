@@ -32,6 +32,11 @@ MANIFEST
 *.nar
 hs_err_pid*
 
+# Android/Gradle
+.gradle/
+android/**/build/
+*.aar
+
 # IDE
 .idea/
 *.iml

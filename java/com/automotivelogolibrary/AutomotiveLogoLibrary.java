@@ -1,8 +1,5 @@
-package com.carlogohelper;
+package com.automotivelogolibrary;
 
-import java.io.File;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -12,7 +9,7 @@ import java.util.Map;
  * Helper class to map car manufacturer names to their logo assets
  * Standalone implementation that works with file paths
  */
-public class CarLogoHelper {
+public class AutomotiveLogoLibrary {
 
     private static final Map<String, String> LOGO_MAP = new HashMap<>();
     private static final Map<String, String> VIN_WMI_MAP = new HashMap<>(); // World Manufacturer Identifier
@@ -399,3 +396,4 @@ public class CarLogoHelper {
         return LOGO_MAP.keySet().toArray(new String[0]);
     }
 }
+

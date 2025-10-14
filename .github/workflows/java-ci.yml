@@ -25,13 +25,13 @@ jobs:
     - name: Compile Java source
       run: |
         cd java
-        javac com/carlogohelper/CarLogoHelper.java
+        javac com/automotivelogolibrary/AutomotiveLogoLibrary.java
 
     - name: Verify compilation
       run: |
-        test -f java/com/carlogohelper/CarLogoHelper.class && echo "Compilation successful!" || exit 1
+        test -f java/com/automotivelogolibrary/AutomotiveLogoLibrary.class && echo "Compilation successful!" || exit 1
 
     - name: Basic syntax check
       run: |
         cd java
-        javap com.carlogohelper.CarLogoHelper | grep "public class"
+        javap com.automotivelogolibrary.AutomotiveLogoLibrary | grep "public class"

@@ -1,6 +1,6 @@
 # API Reference
 
-This document summarizes the public API for both Python and Java implementations.
+This document summarizes the public API for Python, Java, and Android implementations of Automotive Logo Library.
 
 ## Python (`carlogohelper`)
 
@@ -21,7 +21,7 @@ Import path: `from carlogohelper import ...`
 - `get_supported_manufacturers() -> List[str]`
   - Returns all keys present in the internal logo map (upper‑case names and aliases).
 
-- `get_logo_url(input_str: str, base_url: str = "https://raw.githubusercontent.com/wal33d/car-logo-helper/main/assets/logos/") -> Optional[str]`
+- `get_logo_url(input_str: str, base_url: str = "https://raw.githubusercontent.com/wal33d/automotive-logo-library/main/assets/logos/") -> Optional[str]`
   - Returns a URL to the logo asset for web use. Customize `base_url` if self‑hosting.
 
 - Class `CarLogoHelper(assets_dir: Optional[str] = None)`
@@ -43,7 +43,7 @@ print(helper.get_logo_filename("Mercedes-Benz"))               # logo_mercedes_b
 print(helper.has_logo("BMW"))                                  # True
 ```
 
-## Java (`com.carlogohelper.CarLogoHelper`)
+## Java (`com.automotivelogolibrary.AutomotiveLogoLibrary`)
 
 Static methods:
 
@@ -65,11 +65,23 @@ Static methods:
 Example:
 
 ```java
-import com.carlogohelper.CarLogoHelper;
+import com.automotivelogolibrary.AutomotiveLogoLibrary;
 
-String make = CarLogoHelper.getManufacturerFromVIN("WDB2020331A123456"); // MERCEDES-BENZ
-String file = CarLogoHelper.getLogoFilename("BMW");                       // logo_bmw.png
-boolean ok = CarLogoHelper.hasLogo("Toyota");                             // true
+String make = AutomotiveLogoLibrary.getManufacturerFromVIN("WDB2020331A123456"); // MERCEDES-BENZ
+String file = AutomotiveLogoLibrary.getLogoFilename("BMW");                       // logo_bmw.png
+boolean ok = AutomotiveLogoLibrary.hasLogo("Toyota");                             // true
+
+## Android (`com.automotivelogolibrary.AutomotiveLogoLibraryAndroid`)
+
+Static helpers for assets bundled under `assets/logos/`:
+
+- `String getManufacturerFromVIN(String vin)`
+- `String getLogoFilename(String input)`
+- `boolean hasLogo(Context context, String input)`
+- `InputStream openLogoStream(Context context, String input)`
+- `Drawable getLogoDrawable(Context context, String input)`
+- `String getLogoAssetPath(String input)`
+- `Uri getLogoAssetUri(String input)`
 ```
 
 ## Matching Rules
@@ -83,4 +95,3 @@ boolean ok = CarLogoHelper.hasLogo("Toyota");                             // tru
 - Logos are PNG files under `assets/logos/`.
 - Naming: `logo_[lowercase_name_with_underscores].png`.
 - Ensure you have rights to use logos in your application.
-

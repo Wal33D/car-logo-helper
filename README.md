@@ -1,8 +1,8 @@
-# Car Logo Helper
+# Automotive Logo Library
 
-[![Python CI](https://github.com/wal33d/car-logo-helper/actions/workflows/python-ci.yml/badge.svg)](https://github.com/wal33d/car-logo-helper/actions/workflows/python-ci.yml)
-[![Java CI](https://github.com/wal33d/car-logo-helper/actions/workflows/java-ci.yml/badge.svg)](https://github.com/wal33d/car-logo-helper/actions/workflows/java-ci.yml)
-[![Android CI](https://github.com/wal33d/car-logo-helper/actions/workflows/android-ci.yml/badge.svg)](https://github.com/wal33d/car-logo-helper/actions/workflows/android-ci.yml)
+[![Python CI](https://github.com/wal33d/automotive-logo-library/actions/workflows/python-ci.yml/badge.svg)](https://github.com/wal33d/automotive-logo-library/actions/workflows/python-ci.yml)
+[![Java CI](https://github.com/wal33d/automotive-logo-library/actions/workflows/java-ci.yml/badge.svg)](https://github.com/wal33d/automotive-logo-library/actions/workflows/java-ci.yml)
+[![Android CI](https://github.com/wal33d/automotive-logo-library/actions/workflows/android-ci.yml/badge.svg)](https://github.com/wal33d/automotive-logo-library/actions/workflows/android-ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
 [![Java Version](https://img.shields.io/badge/java-8%2B-orange)](https://www.oracle.com/java/)
@@ -34,8 +34,8 @@ The library includes logos for major automotive manufacturers including:
 
 ```bash
 # Install from source
-git clone https://github.com/wal33d/car-logo-helper.git
-cd car-logo-helper/python
+git clone https://github.com/wal33d/automotive-logo-library.git
+cd automotive-logo-library/python
 pip install -e .
 ```
 
@@ -43,21 +43,21 @@ Note: When published to PyPI, the distribution name will be `automotive-logo-lib
 
 ### Java
 
-Copy `java/com/carlogohelper/CarLogoHelper.java` into your project, or compile directly:
+Copy `java/com/automotivelogolibrary/AutomotiveLogoLibrary.java` into your project, or compile directly:
 
 ```bash
 cd java
-javac com/carlogohelper/CarLogoHelper.java
+javac com/automotivelogolibrary/AutomotiveLogoLibrary.java
 ```
 
 Use on the classpath as needed for your project setup.
 
 ### Android
 
-A ready-to-use Android library module is included at `android/carlogohelper-android`.
+A ready-to-use Android library module is included at `android/automotive-logo-library-android`.
 
-- Option 1: Import the module into your Android project (File → New → Import Module...) and select `android/carlogohelper-android`.
-- Option 2: Add as a composite build or submodule and include `":carlogohelper-android"` in your settings.
+- Option 1: Import the module into your Android project (File → New → Import Module...) and select `android/automotive-logo-library-android`.
+- Option 2: Add as a composite build or submodule and include `":automotive-logo-library-android"` in your settings.
 
 Requirements: `compileSdk 34`, `minSdk 21`.
 
@@ -66,25 +66,22 @@ Requirements: `compileSdk 34`, `minSdk 21`.
 ### Java
 
 ```java
-import com.carlogohelper.CarLogoHelper;
-
-// Initialize with assets directory
-CarLogoHelper helper = new CarLogoHelper("path/to/assets/logos");
+import com.automotivelogolibrary.AutomotiveLogoLibrary;
 
 // Get manufacturer from VIN
-String manufacturer = helper.getManufacturerFromVIN("WDB2020331A123456");
+String manufacturer = AutomotiveLogoLibrary.getManufacturerFromVIN("WDB2020331A123456");
 // Returns: "MERCEDES-BENZ"
 
-// Get logo path
-Path logoPath = helper.getLogoPath("BMW");
+// Get logo path (pass assets dir)
+Path logoPath = AutomotiveLogoLibrary.getLogoPath("BMW", "path/to/assets/logos");
 // Returns: Path to logo_bmw.png
 
 // Check if logo exists
-boolean hasLogo = helper.hasLogo("Toyota");
+boolean hasLogo = AutomotiveLogoLibrary.hasLogo("Toyota");
 // Returns: true
 
 // Get logo filename
-String filename = helper.getLogoFilename("Tesla");
+String filename = AutomotiveLogoLibrary.getLogoFilename("Tesla");
 // Returns: "logo_tesla.png"
 ```
 
@@ -110,7 +107,7 @@ has_logo = helper.has_logo("Toyota")
 
 # Get logo URL for web apps
 logo_url = helper.get_logo_url("Tesla")
-# Returns: "https://raw.githubusercontent.com/wal33d/car-logo-helper/main/assets/logos/logo_tesla.png"
+# Returns: "https://raw.githubusercontent.com/wal33d/automotive-logo-library/main/assets/logos/logo_tesla.png"
 
 # Get all supported manufacturers
 manufacturers = helper.get_supported_manufacturers()
@@ -119,25 +116,25 @@ manufacturers = helper.get_supported_manufacturers()
 ### Android
 
 ```java
-import com.carlogohelper.CarLogoHelperAndroid;
+import com.automotivelogolibrary.AutomotiveLogoLibraryAndroid;
 
 // Decode VIN to manufacturer
-String make = CarLogoHelperAndroid.getManufacturerFromVIN("WDB2020331A123456");
+String make = AutomotiveLogoLibraryAndroid.getManufacturerFromVIN("WDB2020331A123456");
 
 // Get the logo as a Drawable
-Drawable logo = CarLogoHelperAndroid.getLogoDrawable(context, "BMW");
+Drawable logo = AutomotiveLogoLibraryAndroid.getLogoDrawable(context, "BMW");
 
 // Or open an InputStream to the asset
-InputStream is = CarLogoHelperAndroid.openLogoStream(context, "Toyota");
+InputStream is = AutomotiveLogoLibraryAndroid.openLogoStream(context, "Toyota");
 
 // Or build a URI to the asset for image loaders
-Uri uri = CarLogoHelperAndroid.getLogoAssetUri("Tesla"); // file:///android_asset/logos/logo_tesla.png
+Uri uri = AutomotiveLogoLibraryAndroid.getLogoAssetUri("Tesla"); // file:///android_asset/logos/logo_tesla.png
 
 // Check availability
-boolean hasLogo = CarLogoHelperAndroid.hasLogo(context, "Mercedes-Benz");
+boolean hasLogo = AutomotiveLogoLibraryAndroid.hasLogo(context, "Mercedes-Benz");
 
 // List supported manufacturers
-String[] supported = CarLogoHelperAndroid.getSupportedManufacturers();
+String[] supported = AutomotiveLogoLibraryAndroid.getSupportedManufacturers();
 ```
 
 ## API Reference
@@ -188,7 +185,7 @@ All logo files are PNG images located in the `assets/logos/` directory. Logos ar
 ## Project Structure
 
 ```
-car-logo-helper/
+automotive-logo-library/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
@@ -196,16 +193,16 @@ car-logo-helper/
 │   └── logos/           # Logo PNG files
 ├── android/
 │   ├── build.gradle     # Android project build
-│   ├── settings.gradle  # Includes :carlogohelper-android
-│   └── carlogohelper-android/
+│   ├── settings.gradle  # Includes :automotive-logo-library-android
+│   └── automotive-logo-library-android/
 │       ├── build.gradle
 │       └── src/main/
 │           ├── AndroidManifest.xml
-│           └── java/com/carlogohelper/CarLogoHelperAndroid.java
+│           └── java/com/automotivelogolibrary/AutomotiveLogoLibraryAndroid.java
 ├── java/
 │   └── com/
-│       └── carlogohelper/
-│           └── CarLogoHelper.java
+│       └── automotivelogolibrary/
+│           └── AutomotiveLogoLibrary.java
 ├── python/
 │   ├── setup.py
 │   ├── pyproject.toml

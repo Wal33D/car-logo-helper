@@ -1,4 +1,4 @@
-# Contributing to Car Logo Helper
+# Contributing to Automotive Logo Library
 
 Thanks for your interest in contributing! This project provides simple, dependency‑free helpers to map car manufacturers to logos and decode VINs in both Python and Java.
 
@@ -17,17 +17,17 @@ The most common contributions are adding manufacturers, improving VIN mappings, 
   
   ```bash
   cd java
-  javac com/carlogohelper/CarLogoHelper.java
+  javac com/automotivelogolibrary/AutomotiveLogoLibrary.java
   ```
 
 ## Project Layout
 
 ```
-car-logo-helper/
+automotive-logo-library/
 ├── assets/logos/        # PNG logos (see naming rules below)
-├── java/com/carlogohelper/CarLogoHelper.java
+├── java/com/automotivelogolibrary/AutomotiveLogoLibrary.java
 ├── python/carlogohelper/__init__.py
-├── .github/workflows/   # CI for Python and Java
+├── .github/workflows/   # CI for Python, Java, Android
 ├── README.md
 └── CONTRIBUTING.md
 ```
@@ -40,12 +40,12 @@ car-logo-helper/
 
 2. Update the logo map in both implementations:
    - Python: `python/carlogohelper/__init__.py` → `LOGO_MAP`
-   - Java: `java/com/carlogohelper/CarLogoHelper.java` → `LOGO_MAP`
+   - Java: `java/com/automotivelogolibrary/AutomotiveLogoLibrary.java` → `LOGO_MAP`
    - Include common variants/aliases (e.g., `MERCEDES-BENZ`, `MERCEDES BENZ`, `MERCEDES`).
 
 3. If VIN prefixes are known, add WMI codes:
    - Python: `VIN_WMI_MAP` in `python/carlogohelper/__init__.py`
-   - Java: `VIN_WMI_MAP` in `java/com/carlogohelper/CarLogoHelper.java`
+   - Java: `VIN_WMI_MAP` in `java/com/automotivelogolibrary/AutomotiveLogoLibrary.java`
    - Prefer 3‑character WMIs; add 2‑character fallbacks only if needed.
 
 4. Update docs where relevant:
@@ -67,7 +67,7 @@ print('Python checks passed')
 PY
 
 # Java compilation
-cd java && javac com/carlogohelper/CarLogoHelper.java && echo 'Java compiled'
+cd java && javac com/automotivelogolibrary/AutomotiveLogoLibrary.java && echo 'Java compiled'
 ```
 
 CI runs on pushes and PRs for multiple Python and Java versions. See `.github/workflows/`.
@@ -92,4 +92,3 @@ Logos are the property of their respective owners and are included for identific
 ## Questions
 
 Open a discussion or issue if anything is unclear. Thanks for contributing!
-

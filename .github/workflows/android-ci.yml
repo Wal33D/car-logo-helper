@@ -26,11 +26,11 @@ jobs:
 
     - name: Build Android library
       working-directory: android
-      run: gradle clean :carlogohelper-android:assembleRelease --no-daemon --stacktrace
+      run: gradle clean :automotive-logo-library-android:assembleRelease --no-daemon --stacktrace
 
     - name: Run Android lint
       working-directory: android
-      run: gradle :carlogohelper-android:lint --no-daemon --stacktrace
+      run: gradle :automotive-logo-library-android:lint --no-daemon --stacktrace
 
     - name: Verify AAR output
       run: |

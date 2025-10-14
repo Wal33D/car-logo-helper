@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Car Logo Helper - Map car manufacturers to their logos and decode VINs
+Automotive Logo Library - Map car manufacturers to their logos and decode VINs
 """
 
 import os
 import re
 from pathlib import Path
-from typing import Optional, List, Union
+from typing import Optional, List
 
 # Logo filename mappings
 LOGO_MAP = {
@@ -272,7 +272,7 @@ def get_supported_manufacturers() -> List[str]:
     return list(LOGO_MAP.keys())
 
 
-def get_logo_url(input_str: str, base_url: str = "https://raw.githubusercontent.com/wal33d/car-logo-helper/main/assets/logos/") -> Optional[str]:
+def get_logo_url(input_str: str, base_url: str = "https://raw.githubusercontent.com/wal33d/automotive-logo-library/main/assets/logos/") -> Optional[str]:
     """
     Get URL to logo for web applications
 
@@ -322,9 +322,14 @@ class CarLogoHelper:
         return get_supported_manufacturers()
 
 
+# Backwards-compatible alias under new project name
+AutomotiveLogoLibrary = CarLogoHelper
+
+
 # Export main functions
 __all__ = [
     'CarLogoHelper',
+    'AutomotiveLogoLibrary',
     'get_manufacturer_from_vin',
     'get_logo_path',
     'get_logo_filename',
@@ -334,3 +339,4 @@ __all__ = [
     'LOGO_MAP',
     'VIN_WMI_MAP'
 ]
+
